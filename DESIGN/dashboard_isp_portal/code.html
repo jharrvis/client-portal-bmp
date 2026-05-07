@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#191b23",
+                    "surface": "#faf8ff",
+                    "surface-bright": "#faf8ff",
+                    "surface-tint": "#0c56d0",
+                    "surface-variant": "#e1e2ec",
+                    "error-container": "#ffdad6",
+                    "inverse-surface": "#2e3038",
+                    "error": "#ba1a1a",
+                    "on-error": "#ffffff",
+                    "on-surface": "#191b23",
+                    "on-primary-fixed": "#001848",
+                    "tertiary-container": "#b02300",
+                    "surface-container": "#ededf8",
+                    "secondary-fixed": "#82f9be",
+                    "on-surface-variant": "#434654",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#e7e7f2",
+                    "tertiary-fixed": "#ffdad2",
+                    "outline-variant": "#c3c6d6",
+                    "surface-dim": "#d9d9e4",
+                    "surface-container-highest": "#e1e2ec",
+                    "primary-fixed-dim": "#b2c5ff",
+                    "secondary": "#006c47",
+                    "on-primary-container": "#c4d2ff",
+                    "primary": "#003d9b",
+                    "background": "#faf8ff",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#b2c5ff",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed-dim": "#65dca4",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#005235",
+                    "inverse-on-surface": "#f0f0fb",
+                    "on-secondary-fixed": "#002113",
+                    "tertiary-fixed-dim": "#ffb4a3",
+                    "on-tertiary-fixed": "#3d0600",
+                    "tertiary": "#851800",
+                    "on-primary-fixed-variant": "#0040a2",
+                    "secondary-container": "#82f9be",
+                    "surface-container-low": "#f3f3fd",
+                    "primary-fixed": "#dae2ff",
+                    "on-secondary-container": "#00734c",
+                    "outline": "#737685",
+                    "on-tertiary-container": "#ffc6b9",
+                    "on-tertiary-fixed-variant": "#8b1a00",
+                    "primary-container": "#0052cc"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-margin": "16px",
+                    "stack-md": "16px",
+                    "unit": "4px",
+                    "stack-sm": "8px",
+                    "gutter": "12px",
+                    "stack-lg": "24px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "mono-data": ["monospace"],
+                    "title-sm": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "mono-data": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "title-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- TopAppBar -->
+<header class="flex justify-between items-center h-16 px-container-margin w-full sticky top-0 z-50 bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-primary" data-icon="signal_cellular_alt">signal_cellular_alt</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">ISP Portal</h1>
+</div>
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a technical administrator in a modern office setting. The lighting is soft and professional, with a clean, high-key background. The overall aesthetic is corporate yet approachable, using a palette of soft whites and professional blues to match the technical portal's design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBkq78DhEl9eX_xof0hn2FPaDr_Zw_6y8n8YkG-D2FvVU6UrXGPud2IYN_mLGomlC3swCeXHiH0UR1LMEY6Cw_ihtC-2QaDHivylL6VUn_vRoHn4vUAGAmAoXTUKIBeqU78XMTiLMkpKe78uQmLgWcPeiEq7u29INYnmEwt9m2ecBSGXgsCruuJ16pxltsUklEIQoGVMqNB0pfDRMVmXlPWfvwVlPmieKgW4eHhEbNX1XGwNm0ww5cyzvyuHj0-botfVZ0s4a-U4w"/>
+</div>
+</header>
+<main class="p-container-margin space-y-stack-lg">
+<!-- Status & Bento Grid Header -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Service Status Card -->
+<div class="col-span-1 md:col-span-2 bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl flex items-center justify-between">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-unit">SERVICE STATUS</p>
+<h2 class="font-headline-md text-headline-md text-on-surface">Connection Active</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Fiber-to-the-Home • GigaPlan Pro</p>
+</div>
+<div class="flex flex-col items-end gap-stack-sm">
+<span class="inline-flex items-center gap-stack-sm bg-secondary-container text-on-secondary-container px-stack-md py-stack-sm rounded-full font-label-caps text-label-caps">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                        ONLINE
+                    </span>
+<p class="font-mono-data text-mono-data text-on-surface-variant">Uptime: 14d 06h 22m</p>
+</div>
+</div>
+<!-- Bandwidth Ring Card -->
+<div class="col-span-1 bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl flex flex-col items-center justify-center text-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-stack-md w-full text-left">CURRENT USAGE</p>
+<div class="relative inline-flex items-center justify-center">
+<svg class="w-32 h-32">
+<circle class="text-surface-container-high" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-width="8"></circle>
+<circle class="text-primary progress-ring__circle" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-dasharray="364.4" stroke-dashoffset="100" stroke-linecap="round" stroke-width="8"></circle>
+</svg>
+<div class="absolute flex flex-col items-center">
+<span class="font-headline-md text-headline-md text-on-surface">72%</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant">OF 1TB</span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-stack-md">737.2 GB used this month</p>
+</div>
+</section>
+<!-- Quick Actions Grid -->
+<section>
+<h3 class="font-title-sm text-title-sm text-on-surface mb-stack-md">Quick Actions</h3>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter">
+<button class="flex flex-col items-center justify-center gap-stack-sm bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-icon="payments">payments</span>
+<span class="font-label-caps text-label-caps text-on-surface">Pay Bill</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-stack-sm bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-label-caps text-label-caps text-on-surface">Open Ticket</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-stack-sm bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-icon="speed">speed</span>
+<span class="font-label-caps text-label-caps text-on-surface">Speed Test</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-stack-sm bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl hover:bg-surface-container-low transition-colors group">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform" data-icon="router">router</span>
+<span class="font-label-caps text-label-caps text-on-surface">Router Mgmt</span>
+</button>
+</div>
+</section>
+<!-- Notifications & History -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+<!-- Latest Notification -->
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl">
+<div class="flex justify-between items-center mb-stack-md">
+<h3 class="font-title-sm text-title-sm text-on-surface">Latest Alerts</h3>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="notifications">notifications</span>
+</div>
+<div class="flex gap-stack-md p-stack-md bg-surface-container rounded-lg border border-outline-variant mb-stack-md">
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-primary" data-icon="info">info</span>
+</div>
+<div>
+<p class="font-title-sm text-title-sm text-on-surface" style="font-size: 14px; line-height: 20px;">Scheduled Maintenance</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Maintenance in your area on Friday, Oct 24th from 02:00 AM to 04:00 AM.</p>
+<p class="font-label-caps text-label-caps text-primary mt-stack-sm">2 HOURS AGO</p>
+</div>
+</div>
+<button class="w-full py-stack-sm border border-outline text-primary font-label-caps text-label-caps rounded-lg hover:bg-surface-container-low">VIEW ALL ALERTS</button>
+</div>
+<!-- Billing Summary -->
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-lg rounded-xl">
+<div class="flex justify-between items-center mb-stack-md">
+<h3 class="font-title-sm text-title-sm text-on-surface">Recent Transaction</h3>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="receipt_long">receipt_long</span>
+</div>
+<div class="space-y-stack-md">
+<div class="flex justify-between items-center">
+<div>
+<p class="font-body-md text-body-md text-on-surface">Invoice #ISP-8829</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Monthly Service - Oct 2023</p>
+</div>
+<div class="text-right">
+<p class="font-title-sm text-title-sm text-on-surface">$89.99</p>
+<span class="bg-secondary-container text-on-secondary-container px-stack-sm py-unit rounded font-label-caps text-label-caps" style="font-size: 10px;">PAID</span>
+</div>
+</div>
+<div class="h-[1px] bg-outline-variant w-full"></div>
+<div class="flex justify-between items-center">
+<p class="font-body-sm text-body-sm text-on-surface">Next Due Date</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant font-bold">Nov 15, 2023</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe bg-surface border-t border-outline-variant">
+<!-- Dashboard (Active) -->
+<button class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 scale-95 transition-transform duration-100">
+<span class="material-symbols-outlined" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</button>
+<!-- Network -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-label-caps text-label-caps">Network</span>
+</button>
+<!-- Billing -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-caps text-label-caps">Billing</span>
+</button>
+<!-- Tickets -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-label-caps text-label-caps">Tickets</span>
+</button>
+<!-- Alerts -->
+<button class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container transition-colors">
+<div class="relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute -top-1 -right-1 w-2 h-2 bg-error rounded-full"></span>
+</div>
+<span class="font-label-caps text-label-caps">Alerts</span>
+</button>
+</nav>
+</body></html>

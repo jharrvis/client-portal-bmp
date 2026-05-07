@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-background": "#191b23",
+                    "surface": "#faf8ff",
+                    "surface-bright": "#faf8ff",
+                    "surface-tint": "#0c56d0",
+                    "surface-variant": "#e1e2ec",
+                    "error-container": "#ffdad6",
+                    "inverse-surface": "#2e3038",
+                    "error": "#ba1a1a",
+                    "on-error": "#ffffff",
+                    "on-surface": "#191b23",
+                    "on-primary-fixed": "#001848",
+                    "tertiary-container": "#b02300",
+                    "surface-container": "#ededf8",
+                    "secondary-fixed": "#82f9be",
+                    "on-surface-variant": "#434654",
+                    "on-secondary": "#ffffff",
+                    "surface-container-high": "#e7e7f2",
+                    "tertiary-fixed": "#ffdad2",
+                    "outline-variant": "#c3c6d6",
+                    "surface-dim": "#d9d9e4",
+                    "surface-container-highest": "#e1e2ec",
+                    "primary-fixed-dim": "#b2c5ff",
+                    "secondary": "#006c47",
+                    "on-primary-container": "#c4d2ff",
+                    "primary": "#003d9b",
+                    "background": "#faf8ff",
+                    "on-primary": "#ffffff",
+                    "inverse-primary": "#b2c5ff",
+                    "on-tertiary": "#ffffff",
+                    "secondary-fixed-dim": "#65dca4",
+                    "on-error-container": "#93000a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#005235",
+                    "inverse-on-surface": "#f0f0fb",
+                    "on-secondary-fixed": "#002113",
+                    "tertiary-fixed-dim": "#ffb4a3",
+                    "on-tertiary-fixed": "#3d0600",
+                    "tertiary": "#851800",
+                    "on-primary-fixed-variant": "#0040a2",
+                    "secondary-container": "#82f9be",
+                    "surface-container-low": "#f3f3fd",
+                    "primary-fixed": "#dae2ff",
+                    "on-secondary-container": "#00734c",
+                    "outline": "#737685",
+                    "on-tertiary-container": "#ffc6b9",
+                    "on-tertiary-fixed-variant": "#8b1a00",
+                    "primary-container": "#0052cc"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-margin": "16px",
+                    "stack-md": "16px",
+                    "unit": "4px",
+                    "stack-sm": "8px",
+                    "gutter": "12px",
+                    "stack-lg": "24px"
+            },
+            "fontFamily": {
+                    "label-caps": ["Inter"],
+                    "mono-data": ["monospace"],
+                    "title-sm": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                    "mono-data": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "title-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #faf8ff;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-surface-dim flex justify-between items-center h-16 px-container-margin w-full sticky top-0 z-50 border-b border-outline-variant dark:border-outline">
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim" data-icon="signal_cellular_alt">signal_cellular_alt</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed-dim">ISP Portal</h1>
+</div>
+<div class="flex items-center">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-high border border-outline-variant">
+<img alt="Technical Admin" class="w-full h-full object-cover" data-alt="A professional headshot of a technical network administrator in a modern office environment. The lighting is bright and clean, emphasizing a corporate and reliable persona. The background is a soft-focus office with minimalist decor, maintaining a light-mode aesthetic consistent with professional enterprise software." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAEooB1EGIqAgz0AbNrWdnHq6B78ijERFZI4ecEmvKg6MUhLveGwYxv1bvzXjs5qzo2HNQ5g4sVVZYWn1F8LEtGEeWl7lw_L4LshpewgPElrV4AuVqJq6adGb6aOjCp7KklXMZ-a1LIpfqrRZCYzUKGeQisrIq4xoE62K7mazV89PVcq7C7Jppr8Igxulm-glr-wLKKDNwd2m0-MtwGoycQypsZTd6XoE3LjM_WylrLts6w43h0OhqAaQ-2r5CsOvlWRfd9r-YciQ"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow px-container-margin py-stack-lg max-w-4xl mx-auto w-full mb-24">
+<!-- Search & Filter Bar -->
+<div class="flex flex-col md:flex-row gap-stack-md mb-stack-lg">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full pl-10 pr-4 py-3 bg-surface border border-outline-variant rounded-lg focus:border-primary focus:ring-1 focus:ring-primary outline-none font-body-md text-body-md" placeholder="Search tickets by ID or subject..." type="text"/>
+</div>
+<button class="flex items-center justify-center gap-stack-sm px-stack-lg py-3 border border-outline-variant rounded-lg hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+<span class="font-label-caps text-label-caps">Filters</span>
+</button>
+</div>
+<!-- Ticket Stats Grid -->
+<div class="grid grid-cols-3 gap-gutter mb-stack-lg">
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl text-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-unit">OPEN</p>
+<p class="font-display-lg text-display-lg text-primary">12</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl text-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-unit">PENDING</p>
+<p class="font-display-lg text-display-lg text-tertiary">4</p>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-xl text-center">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-unit">RESOLVED</p>
+<p class="font-display-lg text-display-lg text-secondary">156</p>
+</div>
+</div>
+<!-- Section Header -->
+<div class="flex items-center justify-between mb-stack-md">
+<h2 class="font-title-sm text-title-sm text-on-surface">Active Tickets</h2>
+<button class="font-label-caps text-label-caps text-primary hover:underline">View All</button>
+</div>
+<!-- Ticket List Container -->
+<div class="space-y-stack-md">
+<!-- Ticket Card: Open -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-md hover:shadow-sm transition-shadow">
+<div class="flex justify-between items-start mb-stack-sm">
+<div class="flex items-center gap-stack-sm">
+<span class="font-mono-data text-mono-data bg-surface-container px-2 py-0.5 rounded text-on-surface-variant">#TK-8842</span>
+<span class="px-2 py-0.5 rounded-full bg-primary-container text-on-primary-container font-label-caps text-[10px]">OPEN</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">2h ago</span>
+</div>
+<h3 class="font-title-sm text-title-sm text-on-surface mb-unit">Latency spikes on Northern Node 4</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-stack-md">Users reporting intermittent connectivity issues and high ping during peak hours...</p>
+<div class="flex items-center justify-between border-t border-outline-variant pt-stack-sm">
+<div class="flex items-center gap-unit">
+<span class="material-symbols-outlined text-[18px]" data-icon="update">update</span>
+<span class="font-label-caps text-[11px]">Last update: 10:45 AM</span>
+</div>
+<button class="text-primary font-label-caps text-label-caps flex items-center gap-unit">
+                        Details <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Ticket Card: Pending -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-md hover:shadow-sm transition-shadow">
+<div class="flex justify-between items-start mb-stack-sm">
+<div class="flex items-center gap-stack-sm">
+<span class="font-mono-data text-mono-data bg-surface-container px-2 py-0.5 rounded text-on-surface-variant">#TK-8839</span>
+<span class="px-2 py-0.5 rounded-full bg-secondary-container text-on-secondary-container font-label-caps text-[10px]">PENDING</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Yesterday</span>
+</div>
+<h3 class="font-title-sm text-title-sm text-on-surface mb-unit">Firmware upgrade request for Edge-Switch-02</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-stack-md">Awaiting technician approval for scheduled maintenance window on Sunday 2AM.</p>
+<div class="flex items-center justify-between border-t border-outline-variant pt-stack-sm">
+<div class="flex items-center gap-unit">
+<span class="material-symbols-outlined text-[18px]" data-icon="update">update</span>
+<span class="font-label-caps text-[11px]">Last update: Oct 24, 4:12 PM</span>
+</div>
+<button class="text-primary font-label-caps text-label-caps flex items-center gap-unit">
+                        Details <span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Section Header: Resolved -->
+<div class="flex items-center justify-between mt-stack-lg mb-stack-md">
+<h2 class="font-title-sm text-title-sm text-on-surface">Recently Resolved</h2>
+</div>
+<!-- Ticket Card: Resolved -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-stack-md opacity-75 grayscale-[0.2]">
+<div class="flex justify-between items-start mb-stack-sm">
+<div class="flex items-center gap-stack-sm">
+<span class="font-mono-data text-mono-data bg-surface-container px-2 py-0.5 rounded text-on-surface-variant">#TK-8821</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-variant text-on-surface-variant font-label-caps text-[10px]">RESOLVED</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">2 days ago</span>
+</div>
+<h3 class="font-title-sm text-title-sm text-on-surface mb-unit">VLAN misconfiguration on port 22</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-stack-md">Traffic tagged incorrectly causing isolation. Re-tagged and verified connectivity.</p>
+<div class="flex items-center justify-between border-t border-outline-variant pt-stack-sm">
+<div class="flex items-center gap-unit text-secondary">
+<span class="material-symbols-outlined text-[18px]" data-icon="check_circle">check_circle</span>
+<span class="font-label-caps text-[11px]">Closed: Oct 23, 11:20 AM</span>
+</div>
+<button class="text-primary font-label-caps text-label-caps flex items-center gap-unit">
+                        Archive <span class="material-symbols-outlined text-[16px]" data-icon="archive">archive</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB: Create New Ticket -->
+<button class="fixed bottom-24 right-container-margin w-14 h-14 bg-primary text-on-primary rounded-xl shadow-lg flex items-center justify-center z-40 active:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe bg-surface dark:bg-surface-dim border-t border-outline-variant dark:border-outline">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container dark:hover:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container dark:hover:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined" data-icon="monitoring">monitoring</span>
+<span class="font-label-caps text-label-caps">Network</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container dark:hover:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-caps text-label-caps">Billing</span>
+</a>
+<!-- Active Tab: Tickets -->
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-on-secondary-fixed-variant text-on-secondary-container dark:text-secondary-fixed rounded-full px-4 py-1 scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined" data-icon="confirmation_number" style="font-variation-settings: 'FILL' 1;">confirmation_number</span>
+<span class="font-label-caps text-label-caps">Tickets</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-outline-variant px-4 py-1 hover:bg-surface-container dark:hover:bg-surface-container-highest" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="font-label-caps text-label-caps">Alerts</span>
+</a>
+</nav>
+</body></html>

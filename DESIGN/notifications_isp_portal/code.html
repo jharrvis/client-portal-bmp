@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ISP Portal - Notifications</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-background": "#191b23",
+                      "surface": "#faf8ff",
+                      "surface-bright": "#faf8ff",
+                      "surface-tint": "#0c56d0",
+                      "surface-variant": "#e1e2ec",
+                      "error-container": "#ffdad6",
+                      "inverse-surface": "#2e3038",
+                      "error": "#ba1a1a",
+                      "on-error": "#ffffff",
+                      "on-surface": "#191b23",
+                      "on-primary-fixed": "#001848",
+                      "tertiary-container": "#b02300",
+                      "surface-container": "#ededf8",
+                      "secondary-fixed": "#82f9be",
+                      "on-surface-variant": "#434654",
+                      "on-secondary": "#ffffff",
+                      "surface-container-high": "#e7e7f2",
+                      "tertiary-fixed": "#ffdad2",
+                      "outline-variant": "#c3c6d6",
+                      "surface-dim": "#d9d9e4",
+                      "surface-container-highest": "#e1e2ec",
+                      "primary-fixed-dim": "#b2c5ff",
+                      "secondary": "#006c47",
+                      "on-primary-container": "#c4d2ff",
+                      "primary": "#003d9b",
+                      "background": "#faf8ff",
+                      "on-primary": "#ffffff",
+                      "inverse-primary": "#b2c5ff",
+                      "on-tertiary": "#ffffff",
+                      "secondary-fixed-dim": "#65dca4",
+                      "on-error-container": "#93000a",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-fixed-variant": "#005235",
+                      "inverse-on-surface": "#f0f0fb",
+                      "on-secondary-fixed": "#002113",
+                      "tertiary-fixed-dim": "#ffb4a3",
+                      "on-tertiary-fixed": "#3d0600",
+                      "tertiary": "#851800",
+                      "on-primary-fixed-variant": "#0040a2",
+                      "secondary-container": "#82f9be",
+                      "surface-container-low": "#f3f3fd",
+                      "primary-fixed": "#dae2ff",
+                      "on-secondary-container": "#00734c",
+                      "outline": "#737685",
+                      "on-tertiary-container": "#ffc6b9",
+                      "on-tertiary-fixed-variant": "#8b1a00",
+                      "primary-container": "#0052cc"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "container-margin": "16px",
+                      "stack-md": "16px",
+                      "unit": "4px",
+                      "stack-sm": "8px",
+                      "gutter": "12px",
+                      "stack-lg": "24px"
+              },
+              "fontFamily": {
+                      "label-caps": ["Inter"],
+                      "mono-data": ["monospace"],
+                      "title-sm": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-md": ["Inter"]
+              },
+              "fontSize": {
+                      "label-caps": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "700"}],
+                      "mono-data": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                      "title-sm": ["18px", {"lineHeight": "24px", "fontWeight": "600"}],
+                      "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf8ff;
+            color: #191b23;
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen flex flex-col">
+<!-- TopAppBar Shell -->
+<header class="flex justify-between items-center h-16 px-container-margin w-full sticky top-0 z-50 bg-surface border-b border-outline-variant">
+<div class="flex items-center gap-stack-sm">
+<span class="material-symbols-outlined text-primary" data-icon="signal_cellular_alt">signal_cellular_alt</span>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">ISP Portal</h1>
+</div>
+<div class="flex items-center">
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-outline-variant" data-alt="A professional, close-up studio portrait of a corporate technical administrator with a neutral, focused expression. The lighting is crisp and modern, featuring soft high-key shadows against a clean, light-gray professional background. The image has a high-definition, minimalist aesthetic suitable for a modern ISP management interface profile photo." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCskqzlS8ch41wZmlTMQ8Mo5_F9-kYa6DNgcP5-Rxwu00v5YFU5YxqarqX-Cfje4cqPjS4Ud1BhVrnrKyLTSsOvyHTpJT-tHhQ2R3mf8P2hUF8GKoyaxPErlMXf3TG8tA2IPpxtJVzJVJunR1sRkr36JB6twptSKobGCfVhY_-LAwCumuLjfEi7TEH6jmfUrhKRm2u5FCjcP0J1e6fX-FX3lUjODFZQEiclOU5khzPYh3LPRt3V9fNsU6QutjLfjH1pjOzPuOo6cw"/>
+</div>
+</header>
+<!-- Main Content -->
+<main class="flex-grow px-container-margin py-stack-lg max-w-4xl mx-auto w-full mb-24">
+<div class="flex flex-col gap-stack-lg">
+<header class="flex justify-between items-end">
+<h2 class="font-headline-md text-headline-md text-on-surface">System Alerts</h2>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase bg-surface-container px-stack-sm py-unit rounded">Live Monitoring</span>
+</header>
+<!-- Categorized Sections -->
+<div class="space-y-stack-lg">
+<!-- Category: Maintenance -->
+<section>
+<div class="flex items-center gap-gutter mb-stack-md">
+<span class="font-title-sm text-title-sm text-primary">Maintenance</span>
+<div class="h-px flex-grow bg-outline-variant opacity-30"></div>
+</div>
+<div class="grid grid-cols-1 gap-stack-sm">
+<!-- Alert Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-lg flex gap-gutter transition-all hover:border-primary">
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-tertiary" data-icon="build">build</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-unit">
+<h3 class="font-title-sm text-title-sm text-on-surface">Scheduled Core Upgrade</h3>
+<time class="font-mono-data text-mono-data text-on-surface-variant">02:45 UTC</time>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Central exchange routing hardware replacement. Expect 15-minute latency spikes in Northern sectors.</p>
+</div>
+</div>
+<!-- Alert Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-lg flex gap-gutter transition-all hover:border-primary">
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-tertiary" data-icon="router">router</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-unit">
+<h3 class="font-title-sm text-title-sm text-on-surface">Firmware Push: V4.12</h3>
+<time class="font-mono-data text-mono-data text-on-surface-variant">Yesterday</time>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Automated security patch deployment for enterprise-grade gateways finalized.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Category: Billing -->
+<section>
+<div class="flex items-center gap-gutter mb-stack-md">
+<span class="font-title-sm text-title-sm text-secondary">Billing</span>
+<div class="h-px flex-grow bg-outline-variant opacity-30"></div>
+</div>
+<div class="grid grid-cols-1 gap-stack-sm">
+<!-- Alert Card 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant p-stack-md rounded-lg flex gap-gutter transition-all hover:border-secondary">
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-secondary" data-icon="receipt_long">receipt_long</span>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start mb-unit">
+<h3 class="font-title-sm text-title-sm text-on-surface">Invoice Generated: OCT-2023</h3>
+<time class="font-mono-data text-mono-data text-on-surface-variant">3h ago</time>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Your monthly statement for account #4902-X is now available for review.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Category: General -->
+<section>
+<div class="flex items-center gap-gutter mb-stack-md">
+<span class="font-title-sm text-title-sm text-on-surface-variant">General</span>
+<div class="h-px flex-grow bg-outline-variant opacity-30"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-stack-md">
+<!-- Bento Grid style item for general info -->
+<div class="bg-surface-container-low border border-outline-variant p-stack-md rounded-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-stack-sm mb-stack-sm">
+<span class="material-symbols-outlined text-primary" data-icon="info">info</span>
+<h3 class="font-title-sm text-title-sm text-on-surface">Data Cap Reminder</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Usage has reached 85% of your high-speed quota for the current billing cycle.</p>
+</div>
+<time class="mt-stack-lg font-mono-data text-mono-data text-on-surface-variant">10 Oct, 09:12</time>
+</div>
+<div class="bg-surface-container-low border border-outline-variant p-stack-md rounded-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-stack-sm mb-stack-sm">
+<span class="material-symbols-outlined text-secondary" data-icon="verified_user">verified_user</span>
+<h3 class="font-title-sm text-title-sm text-on-surface">Security Audit Complete</h3>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">No vulnerabilities detected in your network configuration during the weekly scan.</p>
+</div>
+<time class="mt-stack-lg font-mono-data text-mono-data text-on-surface-variant">08 Oct, 14:00</time>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- BottomNavBar Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-20 pb-safe bg-surface border-t border-outline-variant">
+<!-- Dashboard -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<!-- Network -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="monitoring">monitoring</span>
+<span class="font-label-caps text-label-caps">Network</span>
+</a>
+<!-- Billing -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="receipt_long">receipt_long</span>
+<span class="font-label-caps text-label-caps">Billing</span>
+</a>
+<!-- Tickets -->
+<a class="flex flex-col items-center justify-center text-on-surface-variant px-4 py-1 hover:bg-surface-container-highest transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="confirmation_number">confirmation_number</span>
+<span class="font-label-caps text-label-caps">Tickets</span>
+</a>
+<!-- Alerts (Active) -->
+<a class="flex flex-col items-center justify-center bg-secondary-container text-on-secondary-container rounded-full px-4 py-1 scale-95 transition-transform duration-100" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="notifications" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="font-label-caps text-label-caps">Alerts</span>
+</a>
+</nav>
+</body></html>
