@@ -548,3 +548,416 @@ button { cursor: pointer; border: none; background: none; touch-action: manipula
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+.ds-link-card {
+  display: block;
+  color: inherit;
+}
+
+.ds-link-card.active .ds-list-item {
+  border-color: var(--primary);
+  background-color: var(--primary-fixed);
+}
+
+.ds-monitor-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.ds-monitor-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.ds-filter-grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.ds-period-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-sm);
+}
+
+.ds-period-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 12px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--outline-variant);
+  background-color: var(--surface-container-low);
+  color: var(--on-surface-variant);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ds-period-chip.active {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.ds-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+.ds-kpi-card {
+  background-color: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-xl);
+  padding: var(--space-md);
+}
+
+.ds-kpi-value {
+  margin-top: 4px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.ds-chart-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.ds-chart-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ds-chart-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--on-surface-variant);
+}
+
+.ds-chart-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 2px solid currentColor;
+}
+
+.ds-chart-swatch-in {
+  color: #0094d8;
+  background-color: rgba(0, 148, 216, 0.16);
+}
+
+.ds-chart-swatch-out {
+  color: #ff275f;
+  background-color: rgba(255, 39, 95, 0.16);
+}
+
+.ds-chart-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.ds-chart-svg {
+  width: 100%;
+  min-width: 640px;
+  height: auto;
+  display: block;
+}
+
+.ds-chart-grid-line {
+  stroke: var(--outline-variant);
+  stroke-width: 1;
+}
+
+.ds-chart-grid-line-soft {
+  opacity: 0.35;
+}
+
+.ds-chart-axis {
+  fill: var(--on-surface-variant);
+  font-size: 11px;
+}
+
+.ds-chart-line {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ds-chart-line-in {
+  stroke: #0094d8;
+}
+
+.ds-chart-line-out {
+  stroke: #ff275f;
+}
+
+.ds-chart-area {
+  opacity: 0.12;
+}
+
+.ds-chart-area-in {
+  fill: #0094d8;
+}
+
+.ds-chart-area-out {
+  fill: #ff275f;
+}
+
+.ds-link-card {
+  display: block;
+  color: inherit;
+}
+
+.ds-link-card.active .ds-list-item {
+  border-color: var(--primary);
+  background-color: var(--primary-fixed);
+}
+
+.ds-monitor-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.ds-monitor-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+}
+
+.ds-filter-grid {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.ds-period-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-sm);
+}
+
+.ds-period-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 12px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--outline-variant);
+  background-color: var(--surface-container-low);
+  color: var(--on-surface-variant);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ds-period-chip.active {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--on-primary);
+}
+
+.ds-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gutter);
+}
+
+.ds-kpi-card {
+  background-color: var(--surface-container-lowest);
+  border: 1px solid var(--outline-variant);
+  border-radius: var(--radius-xl);
+  padding: var(--space-md);
+}
+
+.ds-kpi-value {
+  margin-top: 4px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.ds-chart-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.ds-chart-legend {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.ds-chart-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--on-surface-variant);
+}
+
+.ds-chart-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 2px solid currentColor;
+}
+
+.ds-chart-swatch-in {
+  color: #0094d8;
+  background-color: rgba(0, 148, 216, 0.16);
+}
+
+.ds-chart-swatch-out {
+  color: #ff275f;
+  background-color: rgba(255, 39, 95, 0.16);
+}
+
+.ds-chart-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.ds-chart-svg {
+  width: 100%;
+  min-width: 640px;
+  height: auto;
+  display: block;
+}
+
+.ds-chart-grid-line {
+  stroke: var(--outline-variant);
+  stroke-width: 1;
+}
+
+.ds-chart-grid-line-soft {
+  opacity: 0.35;
+}
+
+.ds-chart-axis {
+  fill: var(--on-surface-variant);
+  font-size: 11px;
+}
+
+.ds-chart-line {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.ds-chart-line-in {
+  stroke: #0094d8;
+}
+
+.ds-chart-line-out {
+  stroke: #ff275f;
+}
+
+.ds-chart-area {
+  opacity: 0.12;
+}
+
+.ds-chart-area-in {
+  fill: #0094d8;
+}
+
+.ds-chart-area-out {
+  fill: #ff275f;
+}
+
+.ds-chart-surface {
+  position: relative;
+}
+
+.ds-chart-surface.is-loading {
+  min-height: 320px;
+}
+
+.ds-chart-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: rgba(250, 248, 255, 0.86);
+  backdrop-filter: blur(4px);
+  border-radius: var(--radius-xl);
+}
+
+.ds-spinner {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 3px solid rgba(0, 61, 155, 0.18);
+  border-top-color: var(--primary);
+  animation: ds-spin 0.8s linear infinite;
+}
+
+.ds-chart-animate {
+  animation: ds-chart-fade 220ms ease-out;
+}
+
+.ds-chart-animate .ds-chart-line {
+  stroke-dasharray: 1800;
+  stroke-dashoffset: 1800;
+  animation: ds-chart-draw 700ms ease-out forwards;
+}
+
+.ds-chart-animate .ds-chart-area {
+  animation: ds-chart-area-fade 420ms ease-out forwards;
+}
+
+@keyframes ds-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ds-chart-fade {
+  from {
+    opacity: 0.55;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ds-chart-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes ds-chart-area-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.12;
+  }
+}

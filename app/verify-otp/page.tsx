@@ -6,109 +6,141 @@ export default async function VerifyOtpPage({
   const params = await searchParams;
 
   return (
-    <div className="ds-auth-root">
-      <div className="ds-auth-bg-blob-1" />
-      <div className="ds-auth-bg-blob-2" />
+    <div className="app-root">
+      <div className="phone-frame">
+        <div className="screen auth-screen">
+          <div className="auth-body" style={{ gridTemplateColumns: "1fr", maxWidth: 420, margin: "0 auto" }}>
+            <section className="card card-strong section-pad">
+              <div className="auth-logo-block">
+                <div className="auth-logo-icon">B</div>
+                <div>
+                  <p className="brand-eyebrow" style={{ margin: 0 }}>
+                    Verifikasi OTP
+                  </p>
+                  <h1 className="auth-heading">Masukkan kode</h1>
+                </div>
+              </div>
 
-      <div className="ds-auth-container">
-        {/* Brand */}
-        <div className="ds-auth-brand">
-          <div className="ds-auth-logo">
-            <span className="material-symbols-outlined">lock</span>
+              <p className="auth-subcopy" style={{ marginTop: 8 }}>
+                Gunakan kode OTP yang dikirim ke email Anda atau yang diberikan admin CRM untuk masuk ke portal.
+              </p>
+
+              {params.message ? (
+                <div className="alert alert-success" style={{ marginTop: 18 }}>
+                  {decodeURIComponent(params.message)}
+                </div>
+              ) : null}
+
+              {params.error ? (
+                <div className="alert alert-error" style={{ marginTop: 18 }}>
+                  {decodeURIComponent(params.error)}
+                </div>
+              ) : null}
+
+              <form action="/api/auth/verify-otp" method="POST" style={{ marginTop: 24 }}>
+                <div className="stack">
+                  <div className="field-group">
+                    <label className="field-label">Email</label>
+                    <div className="input-wrap">
+                      <svg className="input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                          d="M4 7.5h16M5.2 6h13.6A1.2 1.2 0 0 1 20 7.2v9.6a1.2 1.2 0 0 1-1.2 1.2H5.2A1.2 1.2 0 0 1 4 16.8V7.2A1.2 1.2 0 0 1 5.2 6Z"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.7"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="m5 8 7 5 7-5"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.7"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                      <input
+                        className="input with-icon"
+                        type="email"
+                        name="email"
+                        defaultValue={params.email ?? ""}
+                        placeholder="nama@email.com"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="field-group">
+                    <label className="field-label">Kode OTP</label>
+                    <div className="input-wrap">
+                      <svg className="input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <rect
+                          x="4"
+                          y="5"
+                          width="16"
+                          height="14"
+                          rx="3"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.7"
+                        />
+                        <path
+                          d="M8 10h8M8 14h4"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.7"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <input
+                        className="input with-icon"
+                        type="text"
+                        name="otp"
+                        placeholder="123456"
+                        required
+                      />
+                    </div>
+                  </div>
+                  <div className="field-group">
+                    <label className="field-label">Nama Device</label>
+                    <div className="input-wrap">
+                      <svg className="input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <rect
+                          x="6"
+                          y="4"
+                          width="12"
+                          height="16"
+                          rx="3"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.7"
+                        />
+                        <path
+                          d="M10 7h4M9 17h6"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.7"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <input
+                        className="input with-icon"
+                        type="text"
+                        name="device_name"
+                        defaultValue="Portal Client"
+                        required
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button className="button button-primary" type="submit" style={{ marginTop: 18 }}>
+                  Verifikasi dan Login
+                </button>
+              </form>
+            </section>
           </div>
-          <h1 className="ds-auth-title">Verifikasi OTP</h1>
-          <p className="ds-auth-subtitle">
-            Masukkan kode yang dikirim ke email Anda
-          </p>
-        </div>
-
-        {/* Card */}
-        <div className="ds-auth-card">
-          {params.message && (
-            <div className="ds-alert ds-alert-success">
-              {decodeURIComponent(params.message)}
-            </div>
-          )}
-          {params.error && (
-            <div className="ds-alert ds-alert-error">
-              {decodeURIComponent(params.error)}
-            </div>
-          )}
-
-          <form
-            className="ds-auth-form"
-            action="/api/auth/verify-otp"
-            method="POST"
-            style={{ marginTop: params.message || params.error ? 16 : 0 }}
-          >
-            {/* Email */}
-            <div className="ds-field-group">
-              <label className="ds-field-label" htmlFor="email">Email</label>
-              <div className="ds-input-wrap">
-                <span className="material-symbols-outlined ds-input-icon">mail</span>
-                <input
-                  className="ds-input with-icon"
-                  id="email"
-                  type="email"
-                  name="email"
-                  defaultValue={params.email ?? ""}
-                  placeholder="nama@email.com"
-                  required
-                />
-              </div>
-            </div>
-
-            {/* OTP Code */}
-            <div className="ds-field-group">
-              <label className="ds-field-label" htmlFor="otp">Kode OTP</label>
-              <div className="ds-input-wrap">
-                <span className="material-symbols-outlined ds-input-icon">pin</span>
-                <input
-                  className="ds-input with-icon"
-                  id="otp"
-                  type="text"
-                  name="otp"
-                  placeholder="123456"
-                  inputMode="numeric"
-                  maxLength={6}
-                  required
-                />
-              </div>
-            </div>
-
-            {/* Device Name */}
-            <div className="ds-field-group">
-              <label className="ds-field-label" htmlFor="device_name">Nama Device</label>
-              <div className="ds-input-wrap">
-                <span className="material-symbols-outlined ds-input-icon">phone_android</span>
-                <input
-                  className="ds-input with-icon"
-                  id="device_name"
-                  type="text"
-                  name="device_name"
-                  defaultValue="Portal Client"
-                  required
-                />
-              </div>
-            </div>
-
-            <button className="ds-btn ds-btn-primary" type="submit" style={{ marginTop: 8 }}>
-              Verifikasi &amp; Login
-              <span className="material-symbols-outlined" style={{ fontSize: 20 }}>arrow_forward</span>
-            </button>
-          </form>
-        </div>
-
-        {/* Back link */}
-        <div className="ds-auth-footer">
-          <a className="ds-auth-link" href="/login">
-            <span className="material-symbols-outlined">arrow_back</span>
-            Kembali ke Login
-          </a>
         </div>
       </div>
-
-      <div className="ds-version-tag">v2.4.0</div>
     </div>
   );
 }

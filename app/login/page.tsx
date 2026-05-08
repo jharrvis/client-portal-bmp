@@ -1,101 +1,89 @@
-export default function LoginPage({
+export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; email?: string }>;
 }) {
+  const params = await searchParams;
+
   return (
-    <div className="ds-auth-root">
-      {/* Background blobs */}
-      <div className="ds-auth-bg-blob-1" />
-      <div className="ds-auth-bg-blob-2" />
-
-      <div className="ds-auth-container">
-        {/* Brand */}
-        <div className="ds-auth-brand">
-          <div className="ds-auth-logo">
-            <span className="material-symbols-outlined">signal_cellular_alt</span>
-          </div>
-          <h1 className="ds-auth-title">
-            BMP<span style={{ color: "var(--primary-container)" }}>net</span>
-          </h1>
-          <p className="ds-auth-subtitle">
-            Masuk untuk mengelola layanan internet Anda
-          </p>
-        </div>
-
-        {/* Login Card */}
-        <div className="ds-auth-card">
-          <form className="ds-auth-form" action="/api/auth/request-otp" method="POST">
-            {/* Email field */}
-            <div className="ds-field-group">
-              <label className="ds-field-label" htmlFor="email">
-                Email terdaftar
-              </label>
-              <div className="ds-input-wrap">
-                <span className="material-symbols-outlined ds-input-icon">mail</span>
-                <input
-                  className="ds-input with-icon"
-                  id="email"
-                  type="email"
-                  name="email"
-                  placeholder="nama@email.com"
-                  required
-                />
+    <div className="app-root">
+      <div className="phone-frame">
+        <div className="screen auth-screen">
+          <div className="auth-body" style={{ gridTemplateColumns: "1fr", maxWidth: 420, margin: "0 auto" }}>
+            <section className="card card-strong section-pad">
+              <div className="auth-logo-block">
+                <div className="auth-logo-icon">B</div>
+                <div>
+                  <p className="brand-eyebrow" style={{ margin: 0 }}>
+                    ISP Management
+                  </p>
+                  <h1 className="auth-heading">
+                    BMP<span style={{ color: "#2563eb" }}>net</span>
+                  </h1>
+                </div>
               </div>
-            </div>
 
-            {/* Submit */}
-            <button className="ds-btn ds-btn-primary" type="submit" style={{ marginTop: 8 }}>
-              Kirim Kode OTP
-              <span className="material-symbols-outlined" style={{ fontSize: 20 }}>arrow_forward</span>
-            </button>
-          </form>
+              <p className="auth-subcopy" style={{ marginTop: 8 }}>
+                Masukkan email terdaftar untuk menerima kode OTP.
+              </p>
 
-          <ErrorBlock searchParams={searchParams} />
-        </div>
+              <form action="/api/auth/request-otp" method="POST" style={{ marginTop: 24 }}>
+                <div className="field-group">
+                  <label className="field-label">Email</label>
+                  <div className="input-wrap">
+                    <svg className="input-icon" viewBox="0 0 24 24" aria-hidden="true">
+                      <path
+                        d="M4 7.5h16M5.2 6h13.6A1.2 1.2 0 0 1 20 7.2v9.6a1.2 1.2 0 0 1-1.2 1.2H5.2A1.2 1.2 0 0 1 4 16.8V7.2A1.2 1.2 0 0 1 5.2 6Z"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.7"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="m5 8 7 5 7-5"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.7"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    <input
+                      className="input with-icon"
+                      type="email"
+                      name="email"
+                      defaultValue={params.email ? decodeURIComponent(params.email) : ""}
+                      placeholder="nama@email.com"
+                      required
+                    />
+                  </div>
+                </div>
 
-        {/* Footer */}
-        <div className="ds-auth-footer">
-          <div className="ds-auth-links">
-            <a className="ds-auth-link" href="#">
-              <span className="material-symbols-outlined">help_outline</span>
-              Support
-            </a>
-            <div className="ds-auth-sep" />
-            <a className="ds-auth-link" href="#">
-              <span className="material-symbols-outlined">shield</span>
-              Privasi
-            </a>
-          </div>
-          <div className="ds-security-badge">
-            <span
-              className="material-symbols-outlined ds-text-secondary"
-              style={{ fontSize: 16, fontVariationSettings: "'FILL' 1" }}
-            >
-              verified_user
-            </span>
-            <span className="ds-label-caps ds-text-muted" style={{ fontSize: 10 }}>
-              Terenkripsi 256-bit AES
-            </span>
+                <button className="button button-primary" type="submit" style={{ marginTop: 18 }}>
+                  Kirim OTP
+                </button>
+              </form>
+
+              <div style={{ marginTop: 14, textAlign: "center" }}>
+                <a
+                  href="/verify-otp"
+                  className="small"
+                  style={{ color: "#2563eb", fontWeight: 800 }}
+                >
+                  Saya sudah punya OTP
+                </a>
+              </div>
+
+              {params.error ? (
+                <div className="alert alert-error" style={{ marginTop: 18 }}>
+                  {decodeURIComponent(params.error)}
+                </div>
+              ) : null}
+            </section>
           </div>
         </div>
       </div>
-
-      <div className="ds-version-tag">v2.4.0</div>
-    </div>
-  );
-}
-
-async function ErrorBlock({
-  searchParams,
-}: {
-  searchParams: Promise<{ error?: string }>;
-}) {
-  const params = await searchParams;
-  if (!params.error) return null;
-  return (
-    <div className="ds-alert ds-alert-error">
-      {decodeURIComponent(params.error)}
     </div>
   );
 }
