@@ -1,25 +1,32 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import { PwaRegister } from "@/components/pwa-register";
 import "./globals.css";
 
-const inter = Inter({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
+  variable: "--font-plus-jakarta-sans",
 });
 
 export const metadata: Metadata = {
   title: "Portal Client BMPnet",
   description: "Portal client untuk monitoring usage, invoice, tiket, dan notifikasi.",
+  applicationName: "BMPnet Portal",
   manifest: "/manifest.webmanifest",
+  formatDetection: {
+    telephone: false,
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
     title: "BMP Portal",
   },
   icons: {
-    icon: "/portal-icon.svg",
-    apple: "/portal-icon.svg",
+    icon: [
+      { url: "/pwa/icon-192", sizes: "192x192", type: "image/png" },
+      { url: "/pwa/icon-512", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/pwa/apple-icon", sizes: "180x180", type: "image/png" }],
   },
 };
 
@@ -37,15 +44,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="id">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block"
-          rel="stylesheet"
-        />
-      </head>
-      <body className={inter.className}>{children}</body>
+      <body className={plusJakartaSans.variable}>
+        <PwaRegister />
+        {children}
+      </body>
     </html>
   );
 }
