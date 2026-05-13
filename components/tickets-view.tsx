@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { FormEvent, useState } from "react";
 import useSWR from "swr";
 import { browserJsonFetch } from "@/lib/browser-fetch";
@@ -244,8 +245,7 @@ export function TicketsView() {
                   {ticket.subject}
                 </h4>
                 <p className="ds-body-sm ds-text-muted" style={{ margin: "0 0 10px" }}>
-                  {ticket.category} {" • "}
-                  <span style={{ color: getPriorityColor(ticket.priority), fontWeight: 600 }}>
+                  {ticket.category} | <span style={{ color: getPriorityColor(ticket.priority), fontWeight: 600 }}>
                     Priority: {ticket.priority}
                   </span>
                 </p>
@@ -265,25 +265,22 @@ export function TicketsView() {
                       {ticket.created_at ?? "-"}
                     </span>
                   </div>
-                  <button
+                  <Link
+                    href={`/tickets/${ticket.id}`}
                     className="ds-label-caps ds-text-primary"
                     style={{
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
                       display: "flex",
                       alignItems: "center",
                       gap: 4,
                       fontSize: 12,
                       fontWeight: 700,
                     }}
-                    type="button"
                   >
                     Detail
                     <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
                       chevron_right
                     </span>
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}

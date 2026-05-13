@@ -73,6 +73,41 @@ export type TicketPayload = {
   }>;
 };
 
+export type TicketReplyData = {
+  id: number;
+  author_type: string;
+  author_name: string;
+  message: string;
+  created_at: string | null;
+};
+
+export type TicketDetailPayload = {
+  data: {
+    id: number;
+    ticket_number: string;
+    subject: string;
+    category: string;
+    priority: string;
+    status: string;
+    created_at: string | null;
+    message: string;
+    first_response_at: string | null;
+    resolved_at: string | null;
+    closed_at: string | null;
+    subscription?: {
+      id: number;
+      subscription_code: string;
+      package_name?: string | null;
+      service_name?: string | null;
+    } | null;
+    assigned_to?: {
+      id: number;
+      name: string;
+    } | null;
+    replies: TicketReplyData[];
+  };
+};
+
 export type PortalSubscriptionSummary = {
   id: number;
   subscription_code: string;
