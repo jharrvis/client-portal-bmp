@@ -31,6 +31,48 @@ export type DashboardPayload = {
   }>;
 };
 
+export type InvoicePayload = {
+  data: Array<{
+    id: number;
+    invoice_number: string;
+    invoice_date: string | null;
+    due_date: string | null;
+    status: string;
+    total_amount: number;
+    paid_at: string | null;
+    items_count: number;
+  }>;
+};
+
+export type NotificationPayload = {
+  data: Array<{
+    id: number;
+    type: string;
+    title: string;
+    message: string;
+    read_at: string | null;
+    created_at: string | null;
+  }>;
+};
+
+export type TicketPayload = {
+  data: Array<{
+    id: number;
+    ticket_number: string;
+    subject: string;
+    category: string;
+    priority: string;
+    status: string;
+    created_at: string | null;
+    subscription?: {
+      id: number;
+      subscription_code: string;
+      package_name?: string | null;
+      service_name?: string | null;
+    } | null;
+  }>;
+};
+
 export type PortalSubscriptionSummary = {
   id: number;
   subscription_code: string;
