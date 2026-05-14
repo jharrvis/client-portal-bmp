@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { FormEvent, useMemo, useState } from "react";
 import useSWR from "swr";
 import { browserJsonFetch } from "@/lib/browser-fetch";
 import type { SubscriptionListPayload, TicketPayload } from "@/lib/types";
@@ -52,6 +52,7 @@ export function TicketsView() {
   const { data: subscriptionsPayload } = useSWR<SubscriptionListPayload>("/api/subscriptions", browserJsonFetch);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
+  const [activeFilter, setActiveFilter] = useState<"all" | "open" | "pending" | "resolved">("all");
 
   async function handleCreateTicket(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -112,6 +113,25 @@ export function TicketsView() {
   const resolvedCount = payload.data.filter((ticket) =>
     ["resolved", "closed"].includes(ticket.status.toLowerCase()),
   ).length;
+  const filteredTickets = useMemo(() => {
+    if (activeFilter === "all") {
+      return payload.data;
+    }
+
+    if (activeFilter === "open") {
+      return payload.data.filter((ticket) => ticket.status.toLowerCase() === "open");
+    }
+
+    if (activeFilter === "pending") {
+      return payload.data.filter((ticket) =>
+        ["pending", "waiting_client", "in_progress"].includes(ticket.status.toLowerCase()),
+      );
+    }
+
+    return payload.data.filter((ticket) =>
+      ["resolved", "closed"].includes(ticket.status.toLowerCase()),
+    );
+  }, [activeFilter, payload.data]);
 
   return (
     <>
@@ -229,14 +249,32 @@ export function TicketsView() {
           <h3 className="ds-title-sm" style={{ margin: 0 }}>
             Thread Support
           </h3>
-          <span className="ds-label-caps ds-text-muted">{payload.data.length} tiket</span>
+          <span className="ds-label-caps ds-text-muted">{filteredTickets.length} tiket</span>
         </div>
 
-        {payload.data.length === 0 ? (
+        <div className="ds-row" style={{ flexWrap: "wrap", marginBottom: 12 }}>
+          {[
+            { key: "all", label: "Semua", count: payload.data.length },
+            { key: "open", label: "Open", count: openCount },
+            { key: "pending", label: "Pending", count: pendingCount },
+            { key: "resolved", label: "Resolved", count: resolvedCount },
+          ].map((filter) => (
+            <button
+              key={filter.key}
+              type="button"
+              className={`ds-chip ${activeFilter === filter.key ? "ds-chip-open" : "ds-chip-neutral"}`}
+              onClick={() => setActiveFilter(filter.key as typeof activeFilter)}
+            >
+              {filter.label} ({filter.count})
+            </button>
+          ))}
+        </div>
+
+        {filteredTickets.length === 0 ? (
           <div className="ds-empty">Belum ada tiket support.</div>
         ) : (
           <div className="ds-stack-sm">
-            {payload.data.map((ticket) => (
+            {filteredTickets.map((ticket) => (
               <div key={ticket.id} className="ds-list-item">
                 <div className="ds-list-item-head">
                   <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
@@ -252,6 +290,9 @@ export function TicketsView() {
                       {ticket.ticket_number}
                     </span>
                     <span className={`ds-chip ${getStatusChip(ticket.status)}`}>{getStatusLabel(ticket.status)}</span>
+                    {ticket.status.toLowerCase() === "waiting_client" ? (
+                      <span className="ds-chip ds-chip-warning">Perlu respon Anda</span>
+                    ) : null}
                   </div>
                   <span className="ds-body-sm ds-text-muted" style={{ flexShrink: 0 }}>
                     {ticket.created_at ?? "-"}
