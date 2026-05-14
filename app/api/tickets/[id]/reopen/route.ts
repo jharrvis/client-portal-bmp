@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { CRM_API_BASE_URL } from "@/lib/config";
 import { getPortalToken } from "@/lib/session";
 
-export async function POST(_: Request, context: { params: Promise<{ id: string }> }) {
+export async function POST(request: Request, context: { params: Promise<{ id: string }> }) {
   const token = await getPortalToken();
 
   if (!token) {
@@ -10,6 +10,7 @@ export async function POST(_: Request, context: { params: Promise<{ id: string }
   }
 
   const { id } = await context.params;
+  const body = await request.json().catch(() => ({}));
 
   try {
     const response = await fetch(`${CRM_API_BASE_URL}/tickets/${id}/reopen`, {
@@ -17,7 +18,11 @@ export async function POST(_: Request, context: { params: Promise<{ id: string }
       headers: {
         Accept: "application/json",
         Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        reason: typeof body?.reason === "string" ? body.reason : "",
+      }),
     });
 
     const payload = await response.json().catch(() => ({}));

@@ -73,6 +73,7 @@ export function TicketDetailView({ ticketId }: { ticketId: string }) {
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isReopening, setIsReopening] = useState(false);
+  const [reopenReason, setReopenReason] = useState("");
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
   async function handleReply(event: FormEvent<HTMLFormElement>) {
@@ -119,13 +120,28 @@ export function TicketDetailView({ ticketId }: { ticketId: string }) {
     setFeedback(null);
     setIsReopening(true);
 
+    const trimmedReason = reopenReason.trim();
+
+    if (!trimmedReason) {
+      setFeedback({
+        type: "error",
+        message: "Alasan reopen wajib diisi.",
+      });
+      setIsReopening(false);
+      return;
+    }
+
     try {
       const response = await fetch(`/api/tickets/${ticketId}/reopen`, {
         method: "POST",
         headers: {
           Accept: "application/json",
+          "Content-Type": "application/json",
         },
         credentials: "same-origin",
+        body: JSON.stringify({
+          reason: trimmedReason,
+        }),
       });
 
       const result = await response.json().catch(() => ({}));
@@ -138,6 +154,7 @@ export function TicketDetailView({ ticketId }: { ticketId: string }) {
         type: "success",
         message: result?.message || "Tiket berhasil dibuka kembali.",
       });
+      setReopenReason("");
       await mutate();
     } catch (error) {
       setFeedback({
@@ -329,6 +346,17 @@ export function TicketDetailView({ ticketId }: { ticketId: string }) {
           <div className="ds-stack-sm" style={{ marginTop: 12 }}>
             <div className="ds-alert ds-alert-error">
               Ticket dengan status resolved atau closed tidak dapat dibalas dari portal client.
+            </div>
+            <div className="ds-field-group">
+              <label className="ds-field-label">Alasan Reopen</label>
+              <textarea
+                className="ds-input"
+                rows={4}
+                value={reopenReason}
+                onChange={(event) => setReopenReason(event.target.value)}
+                placeholder="Jelaskan kenapa ticket perlu dibuka kembali."
+                style={{ minHeight: 110, resize: "vertical", paddingTop: 14 }}
+              />
             </div>
             <button
               type="button"
