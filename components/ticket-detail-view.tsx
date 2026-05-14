@@ -58,6 +58,10 @@ function formatBytes(bytes: number) {
   return `${value.toFixed(index === 0 ? 0 : 1)} ${units[index]}`;
 }
 
+function isImageAttachment(mimeType: string | null) {
+  return Boolean(mimeType && mimeType.startsWith("image/"));
+}
+
 export function TicketDetailView({ ticketId }: { ticketId: string }) {
   const { data: payload, mutate } = useSWR<TicketDetailPayload>(
     `/api/tickets/${ticketId}`,
@@ -189,23 +193,78 @@ export function TicketDetailView({ ticketId }: { ticketId: string }) {
               </div>
               <p style={{ margin: 0, lineHeight: 1.65, whiteSpace: "pre-line" }}>{reply.message}</p>
               {reply.attachments.length > 0 ? (
-                <div className="ds-row" style={{ flexWrap: "wrap", marginTop: 10 }}>
-                  {reply.attachments.map((attachment) => (
-                    <a
-                      key={attachment.id}
-                      href={attachment.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="ds-chip ds-chip-neutral"
-                      style={{ textTransform: "none", gap: 8 }}
-                    >
-                      <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
-                        attach_file
-                      </span>
-                      <span>{attachment.name}</span>
-                      <span className="ds-text-muted">({formatBytes(attachment.size_bytes)})</span>
-                    </a>
-                  ))}
+                <div style={{ marginTop: 10 }}>
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "repeat(2, minmax(0, 1fr))",
+                      gap: 10,
+                    }}
+                  >
+                    {reply.attachments
+                      .filter((attachment) => isImageAttachment(attachment.mime_type))
+                      .map((attachment) => (
+                        <a
+                          key={attachment.id}
+                          href={attachment.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          style={{
+                            display: "block",
+                            overflow: "hidden",
+                            borderRadius: 16,
+                            border: "1px solid var(--outline-variant)",
+                            backgroundColor: "var(--surface)",
+                            textDecoration: "none",
+                          }}
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={attachment.url}
+                            alt={attachment.name}
+                            style={{
+                              width: "100%",
+                              height: 120,
+                              objectFit: "cover",
+                              display: "block",
+                            }}
+                          />
+                          <div
+                            style={{
+                              padding: "8px 10px",
+                              fontSize: 12,
+                              color: "var(--on-surface-variant)",
+                              whiteSpace: "nowrap",
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                            }}
+                          >
+                            {attachment.name}
+                          </div>
+                        </a>
+                      ))}
+                  </div>
+
+                  <div className="ds-row" style={{ flexWrap: "wrap", marginTop: 10 }}>
+                    {reply.attachments
+                      .filter((attachment) => !isImageAttachment(attachment.mime_type))
+                      .map((attachment) => (
+                        <a
+                          key={attachment.id}
+                          href={attachment.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="ds-chip ds-chip-neutral"
+                          style={{ textTransform: "none", gap: 8 }}
+                        >
+                          <span className="material-symbols-outlined" style={{ fontSize: 16 }}>
+                            attach_file
+                          </span>
+                          <span>{attachment.name}</span>
+                          <span className="ds-text-muted">({formatBytes(attachment.size_bytes)})</span>
+                        </a>
+                      ))}
+                  </div>
                 </div>
               ) : null}
             </div>

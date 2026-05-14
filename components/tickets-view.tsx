@@ -308,6 +308,11 @@ export function TicketsView() {
                     {ticket.status.toLowerCase() === "waiting_client" ? (
                       <span className="ds-chip ds-chip-warning">Perlu respon Anda</span>
                     ) : null}
+                    {ticket.unread_replies_count > 0 ? (
+                      <span className="ds-chip ds-chip-warning">
+                        {ticket.unread_replies_count} balasan baru
+                      </span>
+                    ) : null}
                   </div>
                   <span className="ds-body-sm ds-text-muted" style={{ flexShrink: 0 }}>
                     {ticket.created_at ?? "-"}

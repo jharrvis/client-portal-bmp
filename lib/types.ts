@@ -64,6 +64,7 @@ export type TicketPayload = {
     priority: string;
     status: string;
     created_at: string | null;
+    unread_replies_count: number;
     subscription?: {
       id: number;
       subscription_code: string;
