@@ -74,6 +74,7 @@ export function TicketDetailView({ ticketId }: { ticketId: string }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isReopening, setIsReopening] = useState(false);
   const [reopenReason, setReopenReason] = useState("");
+  const [lightboxImage, setLightboxImage] = useState<{ url: string; name: string } | null>(null);
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
   async function handleReply(event: FormEvent<HTMLFormElement>) {
@@ -256,11 +257,10 @@ export function TicketDetailView({ ticketId }: { ticketId: string }) {
                     {reply.attachments
                       .filter((attachment) => isImageAttachment(attachment.mime_type))
                       .map((attachment) => (
-                        <a
+                        <button
                           key={attachment.id}
-                          href={attachment.url}
-                          target="_blank"
-                          rel="noreferrer"
+                          type="button"
+                          onClick={() => setLightboxImage({ url: attachment.url, name: attachment.name })}
                           style={{
                             display: "block",
                             overflow: "hidden",
@@ -268,6 +268,8 @@ export function TicketDetailView({ ticketId }: { ticketId: string }) {
                             border: "1px solid var(--outline-variant)",
                             backgroundColor: "var(--surface)",
                             textDecoration: "none",
+                            padding: 0,
+                            cursor: "pointer",
                           }}
                         >
                           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -293,7 +295,7 @@ export function TicketDetailView({ ticketId }: { ticketId: string }) {
                           >
                             {attachment.name}
                           </div>
-                        </a>
+                        </button>
                       ))}
                   </div>
 
@@ -395,6 +397,91 @@ export function TicketDetailView({ ticketId }: { ticketId: string }) {
           </form>
         )}
       </div>
+
+      {lightboxImage ? (
+        <div
+          onClick={() => setLightboxImage(null)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 120,
+            backgroundColor: "rgba(2, 6, 23, 0.82)",
+            backdropFilter: "blur(8px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: 16,
+          }}
+        >
+          <div
+            onClick={(event) => event.stopPropagation()}
+            style={{
+              width: "100%",
+              maxWidth: 960,
+              borderRadius: 24,
+              overflow: "hidden",
+              backgroundColor: "var(--surface)",
+              border: "1px solid var(--outline-variant)",
+              boxShadow: "0 24px 64px rgba(15, 23, 42, 0.35)",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: 12,
+                padding: "14px 16px",
+                borderBottom: "1px solid var(--outline-variant)",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: 14,
+                  fontWeight: 600,
+                  color: "var(--on-surface)",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                {lightboxImage.name}
+              </div>
+              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <a
+                  href={lightboxImage.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="ds-btn ds-btn-outline"
+                  style={{ width: "auto" }}
+                >
+                  Buka File
+                </a>
+                <button
+                  type="button"
+                  className="ds-btn ds-btn-outline"
+                  style={{ width: "auto" }}
+                  onClick={() => setLightboxImage(null)}
+                >
+                  Tutup
+                </button>
+              </div>
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={lightboxImage.url}
+              alt={lightboxImage.name}
+              style={{
+                width: "100%",
+                maxHeight: "78vh",
+                objectFit: "contain",
+                backgroundColor: "rgb(2, 6, 23)",
+                display: "block",
+              }}
+            />
+          </div>
+        </div>
+      ) : null}
     </div>
   );
 }
