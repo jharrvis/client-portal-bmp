@@ -53,6 +53,7 @@ export function TicketsView() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
   const [activeFilter, setActiveFilter] = useState<"all" | "open" | "pending" | "resolved">("all");
+  const tickets = payload?.data ?? [];
 
   async function handleCreateTicket(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -102,36 +103,36 @@ export function TicketsView() {
     }
   }
 
-  if (!payload) {
-    return <div className="ds-empty">Memuat tiket support...</div>;
-  }
-
-  const openCount = payload.data.filter((ticket) => ticket.status.toLowerCase() === "open").length;
-  const pendingCount = payload.data.filter((ticket) =>
+  const openCount = tickets.filter((ticket) => ticket.status.toLowerCase() === "open").length;
+  const pendingCount = tickets.filter((ticket) =>
     ["pending", "waiting_client", "in_progress"].includes(ticket.status.toLowerCase()),
   ).length;
-  const resolvedCount = payload.data.filter((ticket) =>
+  const resolvedCount = tickets.filter((ticket) =>
     ["resolved", "closed"].includes(ticket.status.toLowerCase()),
   ).length;
   const filteredTickets = useMemo(() => {
     if (activeFilter === "all") {
-      return payload.data;
+      return tickets;
     }
 
     if (activeFilter === "open") {
-      return payload.data.filter((ticket) => ticket.status.toLowerCase() === "open");
+      return tickets.filter((ticket) => ticket.status.toLowerCase() === "open");
     }
 
     if (activeFilter === "pending") {
-      return payload.data.filter((ticket) =>
+      return tickets.filter((ticket) =>
         ["pending", "waiting_client", "in_progress"].includes(ticket.status.toLowerCase()),
       );
     }
 
-    return payload.data.filter((ticket) =>
+    return tickets.filter((ticket) =>
       ["resolved", "closed"].includes(ticket.status.toLowerCase()),
     );
-  }, [activeFilter, payload.data]);
+  }, [activeFilter, tickets]);
+
+  if (!payload) {
+    return <div className="ds-empty">Memuat tiket support...</div>;
+  }
 
   return (
     <>
@@ -254,7 +255,7 @@ export function TicketsView() {
 
         <div className="ds-row" style={{ flexWrap: "wrap", marginBottom: 12 }}>
           {[
-            { key: "all", label: "Semua", count: payload.data.length },
+            { key: "all", label: "Semua", count: tickets.length },
             { key: "open", label: "Open", count: openCount },
             { key: "pending", label: "Pending", count: pendingCount },
             { key: "resolved", label: "Resolved", count: resolvedCount },
