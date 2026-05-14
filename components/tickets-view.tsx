@@ -44,6 +44,18 @@ function getPriorityColor(priority: string) {
   }
 }
 
+function formatBytes(bytes: number) {
+  if (!bytes) {
+    return "0 B";
+  }
+
+  const units = ["B", "KB", "MB", "GB"];
+  const index = Math.min(Math.floor(Math.log(bytes) / Math.log(1024)), units.length - 1);
+  const value = bytes / 1024 ** index;
+
+  return `${value.toFixed(index === 0 ? 0 : 1)} ${units[index]}`;
+}
+
 export function TicketsView() {
   const { data: payload, mutate } = useSWR<TicketPayload>("/api/tickets", browserJsonFetch, {
     refreshInterval: 30000,
@@ -63,22 +75,16 @@ export function TicketsView() {
     const form = event.currentTarget;
     const formData = new FormData(form);
     const subscriptionValue = String(formData.get("subscription_id") ?? "").trim();
+    formData.set("subscription_id", subscriptionValue);
 
     try {
       const response = await fetch("/api/tickets", {
         method: "POST",
         headers: {
           Accept: "application/json",
-          "Content-Type": "application/json",
         },
         credentials: "same-origin",
-        body: JSON.stringify({
-          subscription_id: subscriptionValue ? Number(subscriptionValue) : null,
-          subject: String(formData.get("subject") ?? "").trim(),
-          category: String(formData.get("category") ?? "technical").trim(),
-          priority: String(formData.get("priority") ?? "normal").trim(),
-          message: String(formData.get("message") ?? "").trim(),
-        }),
+        body: formData,
       });
 
       const result = await response.json().catch(() => ({}));
@@ -210,6 +216,14 @@ export function TicketsView() {
               required
               style={{ minHeight: 120, resize: "vertical", paddingTop: 14 }}
             />
+          </div>
+
+          <div className="ds-field-group">
+            <label className="ds-field-label">Lampiran</label>
+            <input type="file" name="attachments[]" multiple className="ds-input" />
+            <p className="ds-body-sm ds-text-muted" style={{ margin: 0 }}>
+              Maksimal 5MB per file. Format: JPG, PNG, PDF, DOC, DOCX, XLS, XLSX, ZIP, TXT.
+            </p>
           </div>
 
           <button type="submit" className="ds-btn ds-btn-primary" disabled={isSubmitting}>

@@ -79,6 +79,13 @@ export type TicketReplyData = {
   author_name: string;
   message: string;
   created_at: string | null;
+  attachments: Array<{
+    id: number;
+    name: string;
+    mime_type: string | null;
+    size_bytes: number;
+    url: string;
+  }>;
 };
 
 export type TicketDetailPayload = {

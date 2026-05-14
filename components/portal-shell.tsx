@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 
 type NavKey = "dashboard" | "subscriptions" | "invoices" | "tickets" | "notifications";
 
@@ -15,22 +17,116 @@ export function PortalShell({
   active,
   title,
   subtitle,
-  action,
   children,
   unreadAlerts = false,
 }: {
   active: NavKey;
   title: string;
   subtitle?: string;
-  action?: ReactNode;
   children: ReactNode;
   unreadAlerts?: boolean;
 }) {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isDrawerOpen) {
+      return;
+    }
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsDrawerOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleEscape);
+
+    return () => window.removeEventListener("keydown", handleEscape);
+  }, [isDrawerOpen]);
+
   return (
     <div className="ds-root">
+      <div
+        className={`ds-drawer-backdrop${isDrawerOpen ? " is-open" : ""}`}
+        onClick={() => setIsDrawerOpen(false)}
+        aria-hidden="true"
+      />
+
+      <aside className={`ds-drawer${isDrawerOpen ? " is-open" : ""}`} aria-hidden={!isDrawerOpen}>
+        <div className="ds-drawer-head">
+          <div className="ds-drawer-brand">
+            <div className="ds-drawer-brand-icon">
+              <span className="material-symbols-outlined">signal_cellular_alt</span>
+            </div>
+            <div>
+              <div className="ds-drawer-eyebrow">Portal Client</div>
+              <div className="ds-drawer-title">
+                BMP<span style={{ color: "var(--primary-container)" }}>net</span>
+              </div>
+            </div>
+          </div>
+          <button
+            type="button"
+            className="ds-icon-btn"
+            onClick={() => setIsDrawerOpen(false)}
+            aria-label="Tutup menu"
+          >
+            <span className="material-symbols-outlined">close</span>
+          </button>
+        </div>
+
+        <div className="ds-drawer-body">
+          <div className="ds-drawer-section-label">Menu</div>
+          <nav className="ds-drawer-nav">
+            {navItems.map((item) => (
+              <Link
+                key={item.key}
+                href={item.href}
+                className={`ds-drawer-link${item.key === active ? " active" : ""}`}
+                onClick={() => setIsDrawerOpen(false)}
+              >
+                <span
+                  className="material-symbols-outlined"
+                  style={{
+                    fontVariationSettings: item.key === active
+                      ? "'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24"
+                      : "'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24",
+                  }}
+                >
+                  {item.icon}
+                </span>
+                <span>{item.label}</span>
+                {item.key === "notifications" && unreadAlerts ? (
+                  <span className="ds-drawer-badge">Baru</span>
+                ) : null}
+              </Link>
+            ))}
+          </nav>
+        </div>
+
+        <div className="ds-drawer-foot">
+          <form action="/api/auth/logout" method="POST">
+            <button className="ds-btn ds-btn-outline ds-drawer-logout" type="submit">
+              <span className="material-symbols-outlined" style={{ fontSize: 18 }}>
+                logout
+              </span>
+              Logout
+            </button>
+          </form>
+        </div>
+      </aside>
+
       {/* Top App Bar */}
       <header className="ds-top-bar">
         <div className="ds-top-bar-brand">
+          <button
+            type="button"
+            className="ds-icon-btn"
+            onClick={() => setIsDrawerOpen(true)}
+            aria-label="Buka menu"
+          >
+            <span className="material-symbols-outlined">menu</span>
+          </button>
           <span className="material-symbols-outlined ds-text-primary" style={{ fontSize: 26 }}>
             signal_cellular_alt
           </span>
@@ -39,7 +135,6 @@ export function PortalShell({
           </span>
         </div>
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          {action}
           <div className="ds-top-bar-avatar">
             <span className="material-symbols-outlined" style={{ fontSize: 20 }}>person</span>
           </div>

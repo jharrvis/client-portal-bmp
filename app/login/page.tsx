@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default async function LoginPage({
   searchParams,
 }: {
@@ -59,10 +61,10 @@ export default async function LoginPage({
 
         <div className="ds-auth-footer">
           <div className="ds-auth-links">
-            <a href="/verify-otp" className="ds-auth-link">
+            <Link href="/verify-otp" className="ds-auth-link">
               <span className="material-symbols-outlined">key</span>
               <span>Saya Sudah Punya OTP</span>
-            </a>
+            </Link>
           </div>
 
           <div className="ds-security-badge">

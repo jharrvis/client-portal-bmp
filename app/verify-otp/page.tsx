@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default async function VerifyOtpPage({
   searchParams,
 }: {
@@ -97,10 +99,10 @@ export default async function VerifyOtpPage({
 
         <div className="ds-auth-footer">
           <div className="ds-auth-links">
-            <a href="/login" className="ds-auth-link">
+            <Link href="/login" className="ds-auth-link">
               <span className="material-symbols-outlined">arrow_back</span>
               <span>Kembali ke Login</span>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

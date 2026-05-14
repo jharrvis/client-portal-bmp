@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { crmRequest } from "@/lib/crm-api";
+import { CRM_API_BASE_URL } from "@/lib/config";
 import { getPortalToken } from "@/lib/session";
 import type { TicketPayload } from "@/lib/types";
 
@@ -26,14 +27,23 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: "Unauthenticated." }, { status: 401 });
   }
 
-  const body = await request.json().catch(() => ({}));
+  const body = await request.formData();
 
   try {
-    const payload = await crmRequest("/tickets", {
+    const response = await fetch(`${CRM_API_BASE_URL}/tickets`, {
       method: "POST",
-      token,
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
       body,
     });
+
+    const payload = await response.json().catch(() => ({}));
+
+    if (!response.ok) {
+      throw new Error(payload?.message || "Gagal membuat tiket.");
+    }
 
     return NextResponse.json(payload, { status: 201 });
   } catch (error) {
