@@ -72,6 +72,7 @@ export function TicketDetailView({ ticketId }: { ticketId: string }) {
     },
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isReopening, setIsReopening] = useState(false);
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
   async function handleReply(event: FormEvent<HTMLFormElement>) {
@@ -111,6 +112,40 @@ export function TicketDetailView({ ticketId }: { ticketId: string }) {
       });
     } finally {
       setIsSubmitting(false);
+    }
+  }
+
+  async function handleReopenTicket() {
+    setFeedback(null);
+    setIsReopening(true);
+
+    try {
+      const response = await fetch(`/api/tickets/${ticketId}/reopen`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+        },
+        credentials: "same-origin",
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result?.message || "Gagal membuka kembali tiket.");
+      }
+
+      setFeedback({
+        type: "success",
+        message: result?.message || "Tiket berhasil dibuka kembali.",
+      });
+      await mutate();
+    } catch (error) {
+      setFeedback({
+        type: "error",
+        message: error instanceof Error ? error.message : "Gagal membuka kembali tiket.",
+      });
+    } finally {
+      setIsReopening(false);
     }
   }
 
@@ -291,8 +326,18 @@ export function TicketDetailView({ ticketId }: { ticketId: string }) {
         ) : null}
 
         {replyDisabled ? (
-          <div className="ds-alert ds-alert-error">
-            Ticket dengan status resolved atau closed tidak dapat dibalas dari portal client.
+          <div className="ds-stack-sm" style={{ marginTop: 12 }}>
+            <div className="ds-alert ds-alert-error">
+              Ticket dengan status resolved atau closed tidak dapat dibalas dari portal client.
+            </div>
+            <button
+              type="button"
+              className="ds-btn ds-btn-outline"
+              onClick={handleReopenTicket}
+              disabled={isReopening}
+            >
+              {isReopening ? "Membuka kembali..." : "Reopen Ticket"}
+            </button>
           </div>
         ) : (
           <form onSubmit={handleReply} className="ds-stack" style={{ marginTop: 12 }}>
