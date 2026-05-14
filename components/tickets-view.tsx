@@ -11,12 +11,24 @@ function getStatusChip(status: string) {
     case "open":
       return "ds-chip-open";
     case "pending":
+    case "waiting_client":
       return "ds-chip-pending";
     case "resolved":
     case "closed":
       return "ds-chip-resolved";
     default:
       return "ds-chip-neutral";
+  }
+}
+
+function getStatusLabel(status: string) {
+  switch (status.toLowerCase()) {
+    case "waiting_client":
+      return "waiting client";
+    case "in_progress":
+      return "in progress";
+    default:
+      return status;
   }
 }
 
@@ -33,7 +45,10 @@ function getPriorityColor(priority: string) {
 }
 
 export function TicketsView() {
-  const { data: payload, mutate } = useSWR<TicketPayload>("/api/tickets", browserJsonFetch);
+  const { data: payload, mutate } = useSWR<TicketPayload>("/api/tickets", browserJsonFetch, {
+    refreshInterval: 30000,
+    revalidateOnFocus: true,
+  });
   const { data: subscriptionsPayload } = useSWR<SubscriptionListPayload>("/api/subscriptions", browserJsonFetch);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
@@ -91,7 +106,9 @@ export function TicketsView() {
   }
 
   const openCount = payload.data.filter((ticket) => ticket.status.toLowerCase() === "open").length;
-  const pendingCount = payload.data.filter((ticket) => ticket.status.toLowerCase() === "pending").length;
+  const pendingCount = payload.data.filter((ticket) =>
+    ["pending", "waiting_client", "in_progress"].includes(ticket.status.toLowerCase()),
+  ).length;
   const resolvedCount = payload.data.filter((ticket) =>
     ["resolved", "closed"].includes(ticket.status.toLowerCase()),
   ).length;
@@ -234,7 +251,7 @@ export function TicketsView() {
                     >
                       {ticket.ticket_number}
                     </span>
-                    <span className={`ds-chip ${getStatusChip(ticket.status)}`}>{ticket.status}</span>
+                    <span className={`ds-chip ${getStatusChip(ticket.status)}`}>{getStatusLabel(ticket.status)}</span>
                   </div>
                   <span className="ds-body-sm ds-text-muted" style={{ flexShrink: 0 }}>
                     {ticket.created_at ?? "-"}

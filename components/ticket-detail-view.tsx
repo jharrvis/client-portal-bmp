@@ -21,6 +21,17 @@ function getStatusChip(status: string) {
   }
 }
 
+function getStatusLabel(status: string) {
+  switch (status.toLowerCase()) {
+    case "waiting_client":
+      return "waiting client";
+    case "in_progress":
+      return "in progress";
+    default:
+      return status;
+  }
+}
+
 function getReplyBubbleStyle(authorType: string) {
   if (authorType === "client") {
     return {
@@ -39,6 +50,10 @@ export function TicketDetailView({ ticketId }: { ticketId: string }) {
   const { data: payload, mutate } = useSWR<TicketDetailPayload>(
     `/api/tickets/${ticketId}`,
     browserJsonFetch,
+    {
+      refreshInterval: 15000,
+      revalidateOnFocus: true,
+    },
   );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<{ type: "success" | "error"; message: string } | null>(null);
@@ -99,7 +114,7 @@ export function TicketDetailView({ ticketId }: { ticketId: string }) {
         <Link href="/tickets" className="ds-btn ds-btn-outline" style={{ width: "auto" }}>
           Kembali ke Daftar Ticket
         </Link>
-        <span className={`ds-chip ${getStatusChip(ticket.status)}`}>{ticket.status}</span>
+        <span className={`ds-chip ${getStatusChip(ticket.status)}`}>{getStatusLabel(ticket.status)}</span>
       </div>
 
       <div className="ds-list-item">
@@ -107,7 +122,7 @@ export function TicketDetailView({ ticketId }: { ticketId: string }) {
           <div>
             <div className="ds-row" style={{ marginBottom: 8, flexWrap: "wrap" }}>
               <span className="ds-mono">{ticket.ticket_number}</span>
-              <span className={`ds-chip ${getStatusChip(ticket.status)}`}>{ticket.status}</span>
+              <span className={`ds-chip ${getStatusChip(ticket.status)}`}>{getStatusLabel(ticket.status)}</span>
             </div>
             <h3 className="ds-title-sm" style={{ margin: 0 }}>
               {ticket.subject}
